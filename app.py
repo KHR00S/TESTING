@@ -9,7 +9,7 @@ onnx_model_path = 'best.onnx'
 onnx_session = ort.InferenceSession(onnx_model_path)
 
 # Define class labels
-class_labels = ['Perubahan Warna Gigi', 'Radang Gusi', 'Gigi Berlubang', 'Gigi Sehat', 'Bukan Gigi']
+class_labels = ['Bukan Gigi', 'Gigi Berlubang', 'Gigi Sehat', 'Perubahan Warna Gigi', 'Radang Gusi']
 
 # Function to preprocess image
 def preprocess_image(image):
@@ -51,7 +51,7 @@ def main():
     st.title("Deteksi Kesehatan Gigi")
 
     # Add instructions for the user
-    st.write("Silakan unggah foto gigi bagian depan Anda.")
+    st.write("Silakan unggah foto gigi bagian depan Anda dan Pastikan Hanya Gigi Tidak ada Hidung Kumis (Bibir Diperbolehkan).")
 
     # Upload image
     uploaded_image = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
