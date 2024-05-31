@@ -49,6 +49,11 @@ def classify_image(image):
 # Main Streamlit app
 def main():
     st.title("Deteksi Kesehatan Gigi")
+    # Sidebar with author information
+    st.sidebar.header("Author Information")
+    st.sidebar.text("Name: FAKHRUS SYAKIR")
+    st.sidebar.text("BANGKIT ID: M322D4KY1790")
+    st.sidebar.text("GitHub: KHR00S")
 
     # Add instructions for the user
     st.write("Silakan unggah foto gigi bagian depan Anda dan Pastikan Hanya Gigi Tidak ada Hidung Kumis (Bibir Diperbolehkan).")
