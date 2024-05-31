@@ -6,7 +6,7 @@ import os
 import cv2
 
 # Load the ONNX model
-onnx_model_path = 'D:/MODELING ML/runs/classify/train31/weights/best.onnx'
+onnx_model_path = 'best.onnx'
 onnx_session = ort.InferenceSession(onnx_model_path)
 
 # Define class labels
