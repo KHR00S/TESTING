@@ -3,7 +3,6 @@ import numpy as np
 from PIL import Image
 import onnxruntime as ort
 import os
-import cv2
 
 # Load the ONNX model
 onnx_model_path = 'best.onnx'
@@ -52,49 +51,25 @@ def main():
     st.title("Deteksi Kesehatan Gigi")
 
     # Add instructions for the user
-    st.write("Silakan aktifkan kamera untuk memfoto gigi bagian depan Anda.")
+    st.write("Silakan unggah foto gigi bagian depan Anda.")
 
-    # Capture image from webcam
-    img = st.image([], channels='RGB')
+    # Upload image
+    uploaded_image = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
 
-    # Button to capture image
-    capture_button = st.button("Ambil Foto")
+    if uploaded_image is not None:
+        # Display uploaded image
+        image = Image.open(uploaded_image)
+        st.image(image, caption='Gambar yang Diunggah', use_column_width=True)
 
-    if capture_button:
-        # Capture image from webcam
-        captured_img = st.empty()
-        camera = st.empty()
+        # Button to classify image
+        classify_button = st.button("Klasifikasi Gambar")
 
-        # Turn on webcam
-        cap = cv2.VideoCapture(0)
+        if classify_button:
+            # Classify the uploaded image
+            predicted_label, confidence = classify_image(image)
 
-        # Read and display frame-by-frame
-        ret, frame = cap.read()
-
-        if ret:
-            # Convert frame to RGB format
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            # Convert frame to PIL Image
-            pil_image = Image.fromarray(frame_rgb)
-
-            # Display the camera view
-            camera.image(frame_rgb, channels='RGB', use_column_width=True)
-
-            # Button to confirm capturing the image
-            confirm_capture_button = st.button("Konfirmasi")
-
-            if confirm_capture_button:
-                # Classify the captured image
-                predicted_label, confidence = classify_image(pil_image)
-
-                # Display the prediction
-                captured_img.image(frame_rgb, channels='RGB', use_column_width=True)
-                st.write(f"Prediksi: {predicted_label} (Kepercayaan: {confidence:.2f})")
-
-                # Release the webcam
-                cap.release()
-        else:
-            st.error("Tidak dapat membaca gambar dari kamera.")
+            # Display the prediction
+            st.write(f"Prediksi: {predicted_label} (Kepercayaan: {confidence:.2f})")
 
 if __name__ == "__main__":
     main()
