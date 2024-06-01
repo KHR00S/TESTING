@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import onnxruntime as ort
-import os
 
 # Load the ONNX model
 onnx_model_path = 'best.onnx'
@@ -17,7 +16,7 @@ def preprocess_image(image):
     image = image.resize((416, 416))
     # Convert image to numpy array
     img_array = np.array(image)
-    # Transpose array to (height, width, channels)
+    # Transpose array to (channels, height, width)
     img_array = np.transpose(img_array, (2, 0, 1))
     # Add batch dimension
     img_array = np.expand_dims(img_array, axis=0)
@@ -52,7 +51,7 @@ def main():
     st.sidebar.text("GitHub: KHR00S")
 
     # Add instructions for the user
-    st.write("Silakan unggah foto gigi bagian depan Anda dan Pastikan Hanya Gigi Tidak ada Hidung Kumis (Bibir Diperbolehkan).")
+    st.write("Silakan unggah foto gigi bagian depan Anda dan pastikan hanya gigi yang terlihat. Hidung, kumis, dan bibir harus tidak terlihat.")
 
     # Upload image
     uploaded_image = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
