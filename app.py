@@ -48,7 +48,7 @@ def main():
     st.sidebar.text("GitHub: KHR00S")
 
     # Add instructions for the user
-    st.write("Silakan unggah foto gigi bagian depan Anda dan pastikan hanya gigi yang terlihat. Hidung, dan kumis harus tidak terlihat (bibir diperbolehkan).")
+    st.write("Silakan unggah foto GIGI BAGIAN DEPAN Anda dan pastikan hanya gigi yang terlihat. Hidung, dan kumis harus tidak terlihat (bibir diperbolehkan).")
 
     # Upload image
     uploaded_image = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
