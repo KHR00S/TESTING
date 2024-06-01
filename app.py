@@ -26,8 +26,6 @@ def preprocess_image(image):
 def classify_image(image):
     # Preprocess image
     img_array = preprocess_image(image)
-    # Expand dimensions
-    img_array = np.expand_dims(img_array, axis=0)
     # Perform inference
     input_name = onnx_session.get_inputs()[0].name
     output_name = onnx_session.get_outputs()[0].name
