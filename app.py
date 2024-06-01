@@ -45,8 +45,8 @@ def classify_image(image):
 def main():
     st.title("Deteksi Kesehatan Gigi")
     # Sidebar with author information
-    st.sidebar.header("Author Information")
-    st.sidebar.text("Name: FAKHRUS SYAKIR")
+    st.sidebar.header("Informasi Penulis")
+    st.sidebar.text("Nama: FAKHRUS SYAKIR")
     st.sidebar.text("BANGKIT ID: M322D4KY1790")
     st.sidebar.text("GitHub: KHR00S")
 
