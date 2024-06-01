@@ -27,10 +27,23 @@ def classify_image(image):
     # Preprocess image
     img_array = preprocess_image(image)
 
+    # Print the shape and type of the preprocessed image
+    st.write(f"Preprocessed image shape: {img_array.shape}")
+    st.write(f"Preprocessed image dtype: {img_array.dtype}")
+
     # Perform inference
     input_name = onnx_session.get_inputs()[0].name
     output_name = onnx_session.get_outputs()[0].name
-    classes = onnx_session.run([output_name], {input_name: np.expand_dims(img_array, axis=0)})[0]
+    
+    # Print the input name and output name for debugging
+    st.write(f"Input name: {input_name}")
+    st.write(f"Output name: {output_name}")
+    
+    # Ensure the dimensions match what the model expects
+    img_array = np.expand_dims(img_array, axis=0)
+    st.write(f"Expanded image shape: {img_array.shape}")
+    
+    classes = onnx_session.run([output_name], {input_name: img_array})[0]
     predicted_class_index = np.argmax(classes)
 
     # Get the predicted label and confidence
@@ -63,11 +76,13 @@ def main():
         classify_button = st.button("Klasifikasi Gambar")
 
         if classify_button:
-            # Classify the uploaded image
-            predicted_label, confidence = classify_image(image)
-
-            # Display the prediction
-            st.write(f"Prediksi: {predicted_label} (Kepercayaan: {confidence:.2f})")
+            try:
+                # Classify the uploaded image
+                predicted_label, confidence = classify_image(image)
+                # Display the prediction
+                st.write(f"Prediksi: {predicted_label} (Kepercayaan: {confidence:.2f})")
+            except Exception as e:
+                st.write(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
