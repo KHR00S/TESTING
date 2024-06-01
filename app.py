@@ -17,7 +17,7 @@ def preprocess_image(image):
     image = image.resize((416, 416))
     # Convert image to numpy array
     img_array = np.array(image)
-    # Transpose array to (channels, height, width)
+    # Transpose array to (height, width, channels)
     img_array = np.transpose(img_array, (2, 0, 1))
     # Add batch dimension
     img_array = np.expand_dims(img_array, axis=0)
@@ -37,12 +37,8 @@ def classify_image(image):
     predicted_class_index = np.argmax(classes)
 
     # Get the predicted label and confidence
-    if predicted_class_index < len(class_labels):
-        predicted_label = class_labels[predicted_class_index]
-        confidence = classes[0][predicted_class_index]
-    else:
-        predicted_label = "Kelas tidak dikenal"
-        confidence = 0.0
+    predicted_label = class_labels[predicted_class_index]
+    confidence = classes[0][predicted_class_index]
 
     return predicted_label, confidence
 
