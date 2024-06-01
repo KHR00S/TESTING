@@ -18,8 +18,6 @@ def preprocess_image(image):
     img_array = np.array(image)
     # Transpose array to (channels, height, width)
     img_array = np.transpose(img_array, (2, 0, 1))
-    # Add batch dimension
-    img_array = np.expand_dims(img_array, axis=0)
     # Normalize pixel values
     img_array = img_array.astype(np.float32) / 255.0
     return img_array
@@ -32,7 +30,7 @@ def classify_image(image):
     # Perform inference
     input_name = onnx_session.get_inputs()[0].name
     output_name = onnx_session.get_outputs()[0].name
-    classes = onnx_session.run([output_name], {input_name: img_array})[0]
+    classes = onnx_session.run([output_name], {input_name: np.expand_dims(img_array, axis=0)})[0]
     predicted_class_index = np.argmax(classes)
 
     # Get the predicted label and confidence
