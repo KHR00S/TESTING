@@ -55,7 +55,7 @@ def main():
     # Button to capture image from camera
     if st.button("Ambil Gambar"):
         # OpenCV Capture
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(2)
 
         # Read image from camera
         ret, frame = cap.read()
