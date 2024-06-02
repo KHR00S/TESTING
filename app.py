@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import onnxruntime as ort
-import io
-import cv2
 
 # Load the ONNX model
 onnx_model_path = 'best.onnx'
@@ -50,35 +48,27 @@ def main():
     st.sidebar.text("GitHub: KHR00S")
 
     # Add instructions for the user
-    st.write("Silakan pastikan gigi dan gusi Anda terlihat jelas di kamera. Hidung dan kumis harus tidak terlihat (bibir diperbolehkan).")
+    st.write("Silakan unggah foto GIGI BAGIAN DEPAN Anda, pastikan gusi anda terlihat dan hanya gigi yang terlihat. Hidung, dan kumis harus tidak terlihat (bibir diperbolehkan).")
 
-    # Button to capture image from camera
-    if st.button("Ambil Gambar"):
-        # OpenCV Capture
-        cap = cv2.VideoCapture(2)
+    # Upload image
+    uploaded_image = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
 
-        # Read image from camera
-        ret, frame = cap.read()
-        
-        if ret:
-            # Convert frame to PIL Image
-            pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    if uploaded_image is not None:
+        # Display uploaded image
+        image = Image.open(uploaded_image)
+        st.image(image, caption='Gambar yang Diunggah', use_column_width=True)
 
-            # Display captured image
-            st.image(pil_image, caption="Gambar yang Diambil", use_column_width=True)
+        # Button to classify image
+        classify_button = st.button("Klasifikasi Gambar")
 
+        if classify_button:
             try:
-                # Classify the captured image
-                predicted_label, confidence = classify_image(pil_image)
+                # Classify the uploaded image
+                predicted_label, confidence = classify_image(image)
                 # Display the prediction
                 st.write(f"Prediksi: {predicted_label} (Kepercayaan: {confidence:.2f})")
             except Exception as e:
                 st.write(f"An error occurred: {e}")
-        else:
-            st.write("Gagal mengambil gambar dari kamera")
-
-        # Release the camera
-        cap.release()
 
 if __name__ == "__main__":
     main()
