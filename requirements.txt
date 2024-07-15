@@ -1,5 +1,5 @@
 streamlit
-numpy==1.9
+numpy==1.26
 Pillow
 onnxruntime
 opencv-python-headless
