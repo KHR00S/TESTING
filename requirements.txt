@@ -1,6 +1,5 @@
-streamlit
-numpy
-Pillow
-onnxruntime==1.14.1
-opencv-python-headless
-streamlit-webrtc
+streamlit==1.24.0
+numpy==1.23.5
+Pillow==9.3.0
+onnxruntime==1.18.1
+opencv-python-headless==4.6.0.66
