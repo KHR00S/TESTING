@@ -1,5 +1,5 @@
 streamlit
 numpy<2.0.0
 Pillow
-onnxruntime-web
+onnxruntime
 opencv-python-headless
