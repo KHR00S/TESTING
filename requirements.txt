@@ -3,3 +3,4 @@ numpy<2
 Pillow
 onnxruntime
 opencv-python-headless
+distutils
