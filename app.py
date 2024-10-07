@@ -42,10 +42,14 @@ def classify_image(image):
 def main():
     st.title("Deteksi Kesehatan Gigi")
     # Sidebar with author information
-    st.sidebar.header("Informasi Penulis")
-    st.sidebar.text("Nama: FAKHRUS SYAKIR")
-    st.sidebar.text("BANGKIT ID: M322D4KY1790")
-    st.sidebar.text("GitHub: KHR00S")
+    st.sidebar.title("INFORMASI PEMILIK")
+    st.sidebar.header("Nama Ketua:")
+    st.sidebar.text("HUMAIRA")
+    st.sidebar.header("Nama Anggota:")
+    st.sidebar.text("FAKHRUS SYAKIR")
+    st.sidebar.text("YUSUF DIVA FERNANDO D.")
+    st.sidebar.text("M.NEBIEL WARETH")
+    st.sidebar.text("MUHAZIR AKBAR")
 
     # Add instructions for the user
     st.write("Silakan unggah foto GIGI BAGIAN DEPAN Anda, pastikan gusi anda terlihat dan hanya gigi yang terlihat. Hidung, dan kumis harus tidak terlihat (bibir diperbolehkan).")
